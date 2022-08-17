@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import useGetInitialData from "api/useGetInitialData"
 
-function App() {
+const App = () => {
+
+  const { data, isLoading, error } = useGetInitialData()
+
+  if (isLoading) return (
+    <div>Cargando</div>
+  )
+
+  if (error) return (
+    <div>{`${error.response?.data}`}</div>
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <div>Holi</div>
+      <div>{`${data?.data}`}</div>
+    </>
+  )
 }
 
 export default App;
