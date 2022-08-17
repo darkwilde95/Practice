@@ -1,4 +1,4 @@
-import useGetInitialData from "api/useGetInitialData"
+import useGetInitialData from 'api/useGetInitialData'
 
 const App = () => {
 
