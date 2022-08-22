@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { AxiosError, AxiosPromise } from 'axios'
 
 interface BaseActionParams<T, P, E> {
@@ -17,7 +17,7 @@ const useBaseAction = <T, P, E = T>({ action, onSuccess, onError }: BaseActionPa
 
   const [response, setResponse] = useState<StateType<T, E>>()
 
-  const execRequest = (params: P) => {
+  const execRequest = useCallback((params: P) => {
     setResponse({ isLoading: true })
     action(params).then(res => {
       setResponse({
@@ -34,7 +34,7 @@ const useBaseAction = <T, P, E = T>({ action, onSuccess, onError }: BaseActionPa
       })
       if (onError) onError(err)
     })
-  }
+  }, []) // eslint-disable-next-line
 
   return {
     ...response,
